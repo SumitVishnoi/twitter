@@ -93,8 +93,18 @@ async function getMe(req, res) {
   });
 }
 
+async function logoutUser(req, res) {
+  const token = req.cookies.token
+  res.clearCookie("token")
+
+  res.status(200).json({
+    message: "User logout successfully"
+  })
+}
+
 module.exports = {
   registerUser,
   loginUser,
   getMe,
+  logoutUser
 };
