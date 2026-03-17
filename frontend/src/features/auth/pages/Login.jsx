@@ -1,29 +1,46 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = (e)=> {
-        e.preventDefault()
-    }
+  const { loading, handleLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await handleLogin({ email, password });
+    navigate("/feed");
+  };
+
+  if (loading) {
+    return (
+      <main>
+        <h1>loading...</h1>
+      </main>
+    );
+  }
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold">Register</h1>
+        <h1 className="text-3xl font-semibold">Login</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <input
-          onInput={(e)=> setUsername(e.target.value)}
+            onInput={(e) => setEmail(e.target.value)}
+            value={email}
             className="bg-zinc-200 text-black outline-none p-3 w-95 rounded"
-            type="text"
-            name="usename"
-            id="username"
-            placeholder="Enter username"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter email"
           />
           <input
-          onInput={(e)=> setPassword(e.target.value)}
+            onInput={(e) => setPassword(e.target.value)}
+            value={password}
             className="bg-zinc-200 text-black outline-none p-3 w-95 rounded"
             type="password"
             name="password"
@@ -34,10 +51,15 @@ const Login = () => {
             Login
           </button>
         </form>
-          <p>Don't have an account ? <Link to="/login" className="text-blue-700">Register</Link> </p>
+        <p>
+          Don't have an account ?{" "}
+          <Link to="/login" className="text-blue-700">
+            Register
+          </Link>{" "}
+        </p>
       </div>
     </div>
-  )
+  );
 };
 
 export default Login;

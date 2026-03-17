@@ -1,13 +1,28 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
     const [username, setUsername] = useState("")
         const [email, setEmail] = useState("")
         const [password, setPassword] = useState("")
+
+        const {loading, handleRegister} = useAuth()
+        const navigate = useNavigate()
     
-        const handleSubmit = (e)=> {
+        const handleSubmit = async (e)=> {
             e.preventDefault()
+
+            await handleRegister({username, email, password})
+            navigate("/feed")
+        }
+
+        if(loading) {
+            return (
+              <main>
+                <h1>loading...</h1>
+              </main>
+            )
         }
   return (
     <div className="w-full h-screen flex justify-center items-center">
