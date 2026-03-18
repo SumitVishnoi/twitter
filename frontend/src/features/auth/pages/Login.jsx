@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
 
     await handleLogin({ email, password });
-    navigate("/feed");
+    navigate("/");
   };
 
   if (loading) {

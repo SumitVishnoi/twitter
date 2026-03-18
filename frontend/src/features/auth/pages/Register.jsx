@@ -14,7 +14,7 @@ const Register = () => {
             e.preventDefault()
 
             await handleRegister({username, email, password})
-            navigate("/feed")
+            navigate("/")
         }
 
         if(loading) {

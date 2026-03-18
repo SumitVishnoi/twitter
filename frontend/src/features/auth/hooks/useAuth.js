@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { AuthContext } from "../auth.context"
 import { getMe, login, logout, register } from "../services/atuh.api"
 
@@ -7,7 +7,9 @@ import { getMe, login, logout, register } from "../services/atuh.api"
 export const useAuth = ()=> {
     const context = useContext(AuthContext)
 
-    const {loading,setLoading, user, setUser} = context
+    console.log("loading", context)
+
+    const {loading, setLoading, user, setUser} = context
 
      async function handleRegister({username, email, password}) {
          setLoading(true)
@@ -34,8 +36,8 @@ export const useAuth = ()=> {
      }
 
      async function handleGetMe() {
-        setLoading(true)
-        try {
+         try {
+            setLoading(true)
             const data = await getMe()
             setUser(data.user)
         } catch (error) {
@@ -56,6 +58,10 @@ export const useAuth = ()=> {
             setLoading(false)
         }
      }
+
+     useEffect(()=> {
+        handleGetMe()
+     }, [])
 
     return {
         loading,
