@@ -6,7 +6,7 @@ import { IoStatsChart } from "react-icons/io5";
 import { MdOutlineBookmarkBorder } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
 
-const Feed = () => {
+const Feed = ({post, user}) => {
   return (
     <div className="flex flex-col gap-3 py-5 px-5 border border-t-0 border-zinc-500 hover:bg-zinc-900 ">
       <div className="flex items-center gap-2">
@@ -17,20 +17,20 @@ const Feed = () => {
             alt=""
           />
         </div>
-        <h1 className="text-white font-semibold text-lg">username</h1>
+        <h1 className="text-white font-semibold text-lg">{user.username}</h1>
       </div>
 
       {/* caption */}
       <div>
-        <p className="line-clamp-5">caption: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates laboriosam, officia numquam est ipsam impedit eum esse culpa aperiam corporis animi libero deleniti temporibus nesciunt deserunt totam sint cumque earum?</p>
+        <p className="line-clamp-5">{post.caption}</p>
       </div>
 
       {/* post */}
       <div className="h-[70vh] rounded-md overflow-hidden">
         <img
           className="h-full object-cover w-full"
-          src="https://images.unsplash.com/photo-1699888599894-7adf527c28e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cG9zdCUyMGltYWdlfGVufDB8fDB8fHww"
-          alt=""
+          src={post.imgUrl}
+          alt="post image"
         />
       </div>
 

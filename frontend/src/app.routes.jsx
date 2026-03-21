@@ -5,18 +5,20 @@ import Home from "./features/posts/pages/Home";
 import Protected from "./features/auth/components/Protected";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Protected>
-            <Home />
-        </Protected>
-    },
-    {
-        path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/register",
-        element: <Register />
-    }
-])
+  {
+    path: "/",
+    element: (
+      <Protected>
+        <Home />
+      </Protected>
+    ),
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+]);

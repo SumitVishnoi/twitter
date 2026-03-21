@@ -4,7 +4,7 @@ import News from "./News";
 const Explore = () => {
   return (
     <div className="py-3 px-10 flex flex-col gap-5">
-      <div className="sticky top-0 bg-black">
+      <div className="sticky top-3 bg-black">
         <input
           className="border border-zinc-500 py-3 px-8 w-full rounded-full"
           type="text"

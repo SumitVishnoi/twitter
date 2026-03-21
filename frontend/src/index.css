@@ -4,3 +4,7 @@ body {
   background: black;
   color: whitesmoke;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

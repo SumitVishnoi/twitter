@@ -82,7 +82,7 @@ async function getPostDetails(req, res) {
 }
 
 async function getFeed(req, res) {
-    const feed = await postModel.find()
+    const feed = await postModel.find().populate("user")
 
     res.status(200).json({
         message: "fetched all feeds",

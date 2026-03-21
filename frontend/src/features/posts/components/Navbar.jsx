@@ -1,68 +1,97 @@
-import React from 'react'
-import { GoHomeFill } from "react-icons/go";
+import React from "react";
+import { NavLink } from "react-router";
+import {
+  GoHomeFill,
+} from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { FiUserPlus } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa6";
-import { TbDotsCircleHorizontal } from "react-icons/tb";
-import logo from "../../../assets/logo.png"
+
+const navItems = [
+  { name: "Home", icon: GoHomeFill, path: "/" },
+  { name: "Explore", icon: CiSearch, path: "/explore" },
+  { name: "Notify", icon: VscBell, path: "/notifications" },
+  { name: "Follow", icon: FiUserPlus, path: "/follow" },
+  { name: "Chat", icon: MdOutlineEmail, path: "/chat" },
+];
 
 const Navbar = () => {
   return (
-    <div className='fixed pl-15 flex flex-col gap-5 py-2'>
-        <div className='w-12 h-12'>
-            <img className='invert w-full h-full cursor-pointer' src={logo} alt="" />
-        </div>
+    <>
+      {/* ================= MOBILE (BOTTOM NAV) ================= */}
+      <div className="fixed bottom-0 left-0 w-full bg-red-900 border-t border-zinc-800 flex justify-around items-center py-2 md:hidden z-50">
+        {navItems.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={index}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex flex-col items-center text-xs ${
+                  isActive ? "text-white" : "text-zinc-400"
+                }`
+              }
+            >
+              <Icon className="w-6 h-6" />
+            </NavLink>
+          );
+        })}
+      </div>
+
+      {/* ================= SIDEBAR (TABLET + DESKTOP) ================= */}
+      <aside className="hidden md:flex fixed h-screen w-2/9 flex-col justify-between px-3 lg:px-6 py-4">
         
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <GoHomeFill className='w-7 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>Home</h2>
+        {/* Top */}
+        <div className="flex flex-col gap-4">
+          
+          {/* Logo */}
+          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black font-bold">
+            S
+          </div>
+
+          {/* Nav Items */}
+          {navItems.map((item, index) => {
+            const Icon = item.icon;
+
+            return (
+              <NavLink
+                key={index}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-4 px-3 py-2 rounded-full transition 
+                  hover:bg-zinc-900 ${
+                    isActive ? "text-white font-semibold" : "text-zinc-400"
+                  }`
+                }
+              >
+                <Icon className="w-6 h-6" />
+                <span className="hidden lg:block text-lg">
+                  {item.name}
+                </span>
+              </NavLink>
+            );
+          })}
+
+          {/* Post Button */}
+          <button className="bg-white text-black font-semibold rounded-full py-2 lg:py-3 mt-2 hover:bg-gray-200 transition">
+            <span className="hidden lg:block">Post</span>
+            <span className="lg:hidden">+</span>
+          </button>
         </div>
 
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <CiSearch className='w-7 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>Explore</h2>
+        {/* Bottom Profile */}
+        <div className="hidden lg:flex items-center gap-3 p-3 rounded-full hover:bg-zinc-900 cursor-pointer">
+          <div className="w-10 h-10 bg-zinc-700 rounded-full"></div>
+          <div>
+            <p className="text-sm font-semibold">Sumit</p>
+            <p className="text-xs text-zinc-400">@username</p>
+          </div>
         </div>
+      </aside>
+    </>
+  );
+};
 
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <VscBell className='w-7 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>Notification</h2>
-        </div>
-
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <FiUserPlus className='w-7 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>Follow</h2>
-        </div>
-
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <MdOutlineEmail className='w-7 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>Chat</h2>
-        </div>
-
-        <a href='https://grok.com/' >
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <svg className="w-7 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4.93945 4.96094C7.86569 2.03348 12.1756 1.29525 15.7754 2.77832C16.5718 3.07449 17.2661 3.49585 17.8076 3.8877L14.8018 5.27734C12.003 4.10183 8.79674 4.9012 6.83984 6.86035C4.27606 9.42495 3.69417 13.8137 6.48047 16.7822L6.75781 17.0664L0.124023 23C1.99897 21.0271 3.89507 18.5729 2.75977 15.8096C1.23981 12.1122 2.12498 7.77906 4.93945 4.96094ZM23.9004 0.0996094C21.6357 3.27424 20.7155 5.48855 21.7031 9.74023L21.6963 9.7334C22.4495 12.9342 21.6438 16.4839 19.043 19.0879C15.7641 22.3728 10.5173 23.1041 6.19629 20.1475L9.20898 18.751C11.9667 19.8351 14.984 19.3584 17.1523 17.1875C19.3206 15.0165 19.8074 11.8547 18.7178 9.22363C18.5107 8.72479 17.8897 8.599 17.4551 8.91992L8.58984 15.4717L21.2891 2.70117V2.71191L23.9004 0.0996094Z"></path></svg>
-            <h2 className='text-xl font-medium text-zinc-300'>Grok</h2>
-        </div>
-        </a>
-
-
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <FaRegUser className='w-6 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>Profile</h2>
-        </div>
-
-        <div className='flex items-center gap-3 cursor-pointer'>
-            <TbDotsCircleHorizontal className='w-7 h-8' />
-            <h2 className='text-xl font-medium text-zinc-300'>More</h2>
-        </div>
-
-        <div>
-            <button className='text-black font-medium cursor-pointer text-xl w-full px-15 py-3 bg-white rounded-full'>Post</button>
-        </div>
-    </div>
-  )
-}
-
-export default Navbar
+export default Navbar;

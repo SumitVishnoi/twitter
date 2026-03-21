@@ -7,8 +7,6 @@ import { getMe, login, logout, register } from "../services/atuh.api"
 export const useAuth = ()=> {
     const context = useContext(AuthContext)
 
-    console.log("loading", context)
-
     const {loading, setLoading, user, setUser} = context
 
      async function handleRegister({username, email, password}) {
