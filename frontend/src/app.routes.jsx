@@ -3,6 +3,7 @@ import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import Home from "./features/posts/pages/Home";
 import Protected from "./features/auth/components/Protected";
+import Profile from "./features/user/pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -21,4 +22,8 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  {
+    path: "/profile",
+    element: <Profile />
+  }
 ]);

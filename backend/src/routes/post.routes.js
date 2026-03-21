@@ -51,6 +51,13 @@ postRouter.post("/like/:postId",identifyUser, postController.likePost)
 postRouter.post("/unlike/:postId", identifyUser, postController.unlikePost)
 
 /**
+ * @route GET /api/posts/liked
+ * @description fetch liked posts
+ * @access Private
+ */
+postRouter.get("/liked", identifyUser, postController.getLikePosts)
+
+/**
  * @route POST /api/posts/save/:postId
  * @description save a post
  * @access Private
@@ -64,7 +71,11 @@ postRouter.post("/save/:postId", identifyUser, postController.savePost)
  */
 postRouter.post("/unsave/:postId", identifyUser, postController.unSavePost)
 
-
-
+/**
+ * @route GET /api/posts/saved/:postId
+ * @description fetch the saved posts
+ * @access Private
+ */
+postRouter.get("/saved", identifyUser, postController.getSavePosts)
 
 module.exports = postRouter

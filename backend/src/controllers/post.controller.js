@@ -40,7 +40,6 @@ async function getPosts(req, res) {
         user: req.user.id
     })
 
-    console.log(posts)
     if(!posts) {
         return res.status(404).json({
             message: "Post not found"
@@ -136,6 +135,25 @@ async function unlikePost(req, res) {
 
 }
 
+async function getLikePosts(req, res) {
+    const username = req.user.username
+
+    const liked = await likeModel.find({
+        user: username
+    }).populate("post")
+
+    if(!liked) {
+        return res.status(404).json({
+            message: "Post not found"
+        })
+    }
+
+    res.status(200).json({
+        message: "like posts fetched successfully",
+        liked
+    })
+}
+
 async function savePost(req, res){
     console.log(req.params.postId)
     const username = req.user.username
@@ -185,6 +203,27 @@ async function unSavePost(req, res) {
     })
 }
 
+async function getSavePosts(req, res) {
+    const username = req.user.username
+
+    const isSaved = await saveModel.findOne({user: username})
+
+    if(!isSaved) {
+        return res.status(404).json({
+            message: "Post not found"
+        })
+    }
+
+    const saved = await saveModel.find({
+        user: username,
+    }).populate("post")
+
+    res.status(200).json({
+        messages: "savedPost fetched successfully",
+        saved
+    })
+}
+
 module.exports = {
     createPost,
     getPosts,
@@ -193,5 +232,7 @@ module.exports = {
     likePost,
     unlikePost,
     savePost,
-    unSavePost
+    unSavePost,
+    getSavePosts,
+    getLikePosts
 }

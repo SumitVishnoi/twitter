@@ -25,3 +25,13 @@ export async function getFeed() {
     const response = await api.get("/api/posts/feed") 
     return response.data
 }
+
+export async function getSavePost() {
+    const response = await api.get("/api/posts/saved")
+    return response.data
+}
+
+export async function getLikePost() {
+    const response = await api.get("/api/posts/liked")
+    return response.data
+}
