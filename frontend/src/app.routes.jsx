@@ -4,6 +4,7 @@ import Register from "./features/auth/pages/Register";
 import Home from "./features/posts/pages/Home";
 import Protected from "./features/auth/components/Protected";
 import Profile from "./features/user/pages/Profile";
+import Dashboard from "./features/chat/pages/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -25,5 +26,9 @@ export const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />
   }
 ]);

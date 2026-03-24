@@ -31,7 +31,7 @@ const Home = () => {
       <div className="w-full">
         <Navbar />
       </div>
-      <div className="border border-t-0 border-zinc-500">
+      <div className="border border-t-0 border-b-0 border-zinc-500">
         <div className="flex justify-between items-center border-0 border-b border-zinc-900 sticky top-0 bg-[#16161641] backdrop-blur-2xl shadow-lg">
           <h2
             onClick={() => {
