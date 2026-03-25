@@ -43,8 +43,45 @@ async function followUser(req, res) {
         message: "following successfully",
         follow: followRecord
     })
-
 }
+
+async function getFollowers(req, res) {
+    const followeeUsername = req.params.username
+
+    const followers = await followModel.find({
+        followee: followeeUsername 
+    })
+
+    if(!followers) {
+        return res.status(404).json({
+            message: "User not found"
+        })
+    }
+
+    res.status(200).json({
+        message: "fetched followers successfully",
+        followers
+    })
+}
+
+async function getFollowing(req, res) {
+    const followerUsername = req.user.username
+
+    const following = await followModel.find({
+        follower: followerUsername
+    })
+
+    if(!following) {
+        return res.status(404).json({
+            message: "User not found"
+        })
+    }
+
+    res.status(200).json({
+        message: "fetched following successfully",
+        following
+    })
+}   
 
 async function unFollowUser(req, res) {
     const followerUsername = req.user.username
@@ -73,5 +110,7 @@ async function unFollowUser(req, res) {
 
 module.exports = {
     followUser,
-    unFollowUser
+    unFollowUser,
+    getFollowers,
+    getFollowing
 }

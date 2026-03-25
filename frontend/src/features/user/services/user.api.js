@@ -6,3 +6,22 @@ const api = axios.create({
 })
 
 
+export async function followUser({username}) {
+    const response = await api.post(`/api/users/follow/${username}`)
+    return response.data
+}
+
+export async function unFollowUser({username}) {
+    const response = await api.post(`/api/users/unfollow/${username}`) 
+    return response.data
+}
+
+export async function getFollowers({username}) {
+    const response = await api.get(`/api/users/followers/${username}`)
+    return response.data
+} 
+
+export async function getFollowing({username}) {
+    const response = await api.get(`/api/users/following/${username}`)
+    return response.data
+}
