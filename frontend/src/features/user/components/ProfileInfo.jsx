@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileInfo = ({ user, postsCount }) => {
+const ProfileInfo = ({ user, postsCount, followingCount, followersCount }) => {
   return (
     <div>
       <div className="w-full h-40 md:h-52 bg-linear-to-r from-blue-500 to-purple-600 relative">
@@ -33,11 +33,11 @@ const ProfileInfo = ({ user, postsCount }) => {
 
         <div className="flex gap-6 mt-3 text-sm">
           <p>
-            {/* <span className="font-bold">{user.following}</span>{" "} */}
+            <span className="font-bold">{followingCount}</span>{" "}
             <span className="text-zinc-400">Following</span>
           </p>
           <p>
-            {/* <span className="font-bold">{user.followers}</span>{" "} */}
+            <span className="font-bold">{followersCount}</span>{" "}
             <span className="text-zinc-400">Followers</span>
           </p>
           <p>

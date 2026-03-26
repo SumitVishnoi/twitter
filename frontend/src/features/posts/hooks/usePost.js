@@ -24,7 +24,6 @@ export const usePost = ()=> {
         setLoading(true)
         try {
             const data = await getFeed()
-            console.log(data)
             setFeed(data.feed)
         } catch (error) {
             throw new Error("fetching feed error", error)
@@ -37,7 +36,7 @@ export const usePost = ()=> {
         setLoading(true)
         try {
             const data = await getSavePost()
-            setSaved(data.saved)
+            setSaved(data?.saved)
         } catch (error) {
             throw new Error("fetching save posts error", error)
         } finally {

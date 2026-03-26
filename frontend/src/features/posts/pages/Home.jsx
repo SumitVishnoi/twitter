@@ -53,8 +53,10 @@ const Home = () => {
   
           {data &&
           <div className="overflow-auto h-screen">
-            {feed.map((post)=> (
-            <Feed user={post.user} post={post}/>
+            {feed.map((post, index)=> (
+            <div key={index}>
+              <Feed user={post.user} post={post}/>
+            </div>
           ))}
           </div>
           }

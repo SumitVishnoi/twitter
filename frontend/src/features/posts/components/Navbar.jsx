@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router";
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router";
 import {
   GoHomeFill,
 } from "react-icons/go";
@@ -7,21 +7,24 @@ import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { FiUserPlus } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa6";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 const navItems = [
   { name: "Home", icon: GoHomeFill, path: "/" },
   { name: "Explore", icon: CiSearch, path: "/explore" },
   { name: "Notify", icon: VscBell, path: "/notifications" },
   { name: "Follow", icon: FiUserPlus, path: "/follow" },
-  { name: "Chat", icon: MdOutlineEmail, path: "/chat" },
+  { name: "Chat", icon: MdOutlineEmail, path: "/dashboard" },
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
+
   return (
     <>
       {/* ================= MOBILE (BOTTOM NAV) ================= */}
-      <div className="fixed bottom-0 left-0 w-full bg-red-900 border-t border-zinc-800 flex justify-around items-center py-2 md:hidden z-50">
+      <div className="fixed bottom-0 left-0 w-full bg-black border-t border-zinc-800 flex justify-around items-center py-2 md:hidden z-50">
         {navItems.map((item, index) => {
           const Icon = item.icon;
           return (
@@ -82,11 +85,10 @@ const Navbar = () => {
         </div>
 
         {/* Bottom Profile */}
-        <div className="hidden lg:flex items-center gap-3 p-3 rounded-full hover:bg-zinc-900 cursor-pointer">
+        <div onClick={()=>navigate("/profile")} className="hidden lg:flex items-center gap-3 p-3 rounded-full hover:bg-zinc-900 cursor-pointer">
           <div className="w-10 h-10 bg-zinc-700 rounded-full"></div>
           <div>
             <p className="text-sm font-semibold">Sumit</p>
-            <p className="text-xs text-zinc-400">@username</p>
           </div>
         </div>
       </aside>

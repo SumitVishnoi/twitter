@@ -6,7 +6,7 @@ import { followUser, getFollowers, getFollowing, unFollowUser } from "../service
 export const useUser = ()=> {
     const context = useContext(UserContext)
 
-    const {loading, setLoading, follow, setFollow} = context
+    const {loading, setLoading, follow, setFollow, followers, setFollowers, following, setFollowing} = context
 
     async function handleFollow({username}) {
         setLoading(true)
@@ -25,7 +25,6 @@ export const useUser = ()=> {
         setLoading(true)
         try {
             const data = await unFollowUser({username})
-            // console.log(data)
             setFollow(data)
         } catch (error) {
             throw new Error("User unfollow error ", error)
@@ -38,7 +37,7 @@ export const useUser = ()=> {
         setLoading(true)
         try {
             const data = await getFollowers({username})
-            console.log(data)
+            setFollowers(data.followers)
         } catch (error) {
             throw new Error("User get followers error ", error)
         } finally {
@@ -49,7 +48,7 @@ export const useUser = ()=> {
         setLoading(true)
         try {
             const data = await getFollowing({username})
-            console.log(data)
+            setFollowing(data.following)
         } catch (error) {
             throw new Error("User get following error ", error)
         } finally {
@@ -57,6 +56,6 @@ export const useUser = ()=> {
         }
     }
     return {
-        loading, follow, handleFollow, handleUnFollow, handleGetFollowers, handleGetFollowing
+        loading, follow, followers, following, handleFollow, handleUnFollow, handleGetFollowers, handleGetFollowing
     }
 }
