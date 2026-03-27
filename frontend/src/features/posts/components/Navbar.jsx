@@ -7,7 +7,6 @@ import { CiSearch } from "react-icons/ci";
 import { VscBell } from "react-icons/vsc";
 import { FiUserPlus } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
-import { useAuth } from "../../auth/hooks/useAuth";
 
 const navItems = [
   { name: "Home", icon: GoHomeFill, path: "/" },
