@@ -1,16 +1,24 @@
 import React from "react";
 
-function UserCard({ user, onToggleFollow }) {
+function UserCard({ user, type }) {
   return (
-    <div className="flex items-center justify-between p-3 border-b">
+    <div className="flex items-center justify-between p-3 rounded-lg bg-zinc-900 hover:bg-zinc-800">
       <div className="flex items-center gap-3">
         <img
           src="https://ik.imagekit.io/coders11/twitter/Test_N62kt0v4b"
           alt=""
           className="w-10 h-10 rounded-full"
         />
-        <span className="font-medium">username</span>
+        <span className="font-medium">{user.followee || user.username}</span>
       </div>
+
+      <button
+        className="px-3 py-1 bg-blue-500 rounded cursor-pointer"
+      >
+        {type === "followers" && "accept"}
+        {type === "following" && "unfollow"}
+        {type === "others" && "follow"}
+      </button>
 
       {/* <button
         onClick={() => onToggleFollow(user)}

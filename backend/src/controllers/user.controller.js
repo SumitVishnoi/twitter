@@ -108,9 +108,22 @@ async function unFollowUser(req, res) {
     })
 }
 
+async function getAllUser(req, res) {
+    const username = req.user.username
+    const allUsers = await userModel.find({
+        username: {$ne: username}
+    }).select("-password")
+
+    res.status(200).json({
+        message: "fetched all users",
+        allUsers
+    })
+}
+
 module.exports = {
     followUser,
     unFollowUser,
     getFollowers,
-    getFollowing
+    getFollowing,
+    getAllUser
 }

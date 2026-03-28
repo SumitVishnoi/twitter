@@ -32,5 +32,11 @@ userRouter.get("/followers/:username", identifyUser, userController.getFollowers
  */
 userRouter.get("/following/:username", identifyUser, userController.getFollowing)
 
+/**
+ * @route GET /api/users/
+ * @description get all users
+ * @access Private
+ */
+userRouter.get("/", identifyUser, userController.getAllUser)
 
 module.exports = userRouter

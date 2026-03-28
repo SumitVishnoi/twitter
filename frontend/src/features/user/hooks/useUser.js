@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { UserContext } from "../user.context"
-import { followUser, getFollowers, getFollowing, unFollowUser } from "../services/user.api"
+import { followUser, getAllUsers, getFollowers, getFollowing, unFollowUser } from "../services/user.api"
 
 
 export const useUser = ()=> {
     const context = useContext(UserContext)
 
-    const {loading, setLoading, follow, setFollow, followers, setFollowers, following, setFollowing} = context
+    const {loading, allUser, setAllUser, setLoading, follow, setFollow, followers, setFollowers, following, setFollowing} = context
 
     async function handleFollow({username}) {
         setLoading(true)
@@ -37,6 +37,7 @@ export const useUser = ()=> {
         setLoading(true)
         try {
             const data = await getFollowers({username})
+            console.log(data)
             setFollowers(data.followers)
         } catch (error) {
             throw new Error("User get followers error ", error)
@@ -55,7 +56,19 @@ export const useUser = ()=> {
             setLoading(false)
         }
     }
+
+    async function handleGetAllUsers() {
+        setLoading(true)
+        try {
+            const data = await getAllUsers()
+            setAllUser(data.allUsers)
+        } catch (error) {
+            throw new Error("fetching all users error", error)
+        } finally {
+            setLoading(false)
+        }
+    }
     return {
-        loading, follow, followers, following, handleFollow, handleUnFollow, handleGetFollowers, handleGetFollowing
+        loading, allUser, follow, followers, following, handleGetAllUsers, handleFollow, handleUnFollow, handleGetFollowers, handleGetFollowing
     }
 }

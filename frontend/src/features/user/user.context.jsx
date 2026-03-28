@@ -5,12 +5,13 @@ export const UserContext = createContext()
 
 export const UserProvider = ({children})=> {
     const [loading, setLoading] = useState(false)
+    const [allUser, setAllUser] = useState(null)
     const [follow, setFollow] = useState(null)
     const [followers, setFollowers] = useState(null)
     const [following, setFollowing] = useState(null)
 
     return (
-        <UserContext.Provider value={{loading, setLoading, follow, setFollow, followers, setFollowers, following, setFollowing}}>
+        <UserContext.Provider value={{loading, allUser, setAllUser, setLoading, follow, setFollow, followers, setFollowers, following, setFollowing}}>
             {children}
         </UserContext.Provider>
     )

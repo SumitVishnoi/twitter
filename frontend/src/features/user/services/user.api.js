@@ -25,3 +25,8 @@ export async function getFollowing({username}) {
     const response = await api.get(`/api/users/following/${username}`)
     return response.data
 }
+
+export async function getAllUsers() {
+    const response = await api.get("/api/users")
+    return response.data
+}
