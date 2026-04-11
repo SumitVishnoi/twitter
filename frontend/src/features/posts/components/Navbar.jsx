@@ -77,7 +77,7 @@ const Navbar = () => {
           })}
 
           {/* Post Button */}
-          <button className="bg-white text-black font-semibold rounded-full py-2 lg:py-3 mt-2 hover:bg-gray-200 transition">
+          <button onClick={()=> navigate("/post")} className="bg-white cursor-pointer text-black font-semibold rounded-full py-2 lg:py-3 mt-2 hover:bg-gray-200 transition">
             <span className="hidden lg:block">Post</span>
             <span className="lg:hidden">+</span>
           </button>

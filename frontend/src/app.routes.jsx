@@ -6,6 +6,7 @@ import Protected from "./features/auth/components/Protected";
 import Profile from "./features/user/pages/Profile";
 import Dashboard from "./features/chat/pages/Dashboard";
 import Follow from "./features/user/pages/Follow";
+import Post from "./features/posts/pages/Post";
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const router = createBrowserRouter([
   {
     path: "/follow",
     element: <Follow />
+  },
+  {
+    path: "/post",
+    element: <Post />
   }
 ]);
