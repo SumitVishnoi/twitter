@@ -32,7 +32,7 @@ const Login = () => {
           <input
             onInput={(e) => setEmail(e.target.value)}
             value={email}
-            className="bg-zinc-200 text-black outline-none p-3 w-95 rounded"
+            className="bg-zinc-200 text-black outline-none p-3 w-95 rounded placeholder:text-zinc-500"
             type="email"
             name="email"
             id="email"
@@ -41,21 +41,21 @@ const Login = () => {
           <input
             onInput={(e) => setPassword(e.target.value)}
             value={password}
-            className="bg-zinc-200 text-black outline-none p-3 w-95 rounded"
+            className="bg-zinc-200 text-black outline-none p-3 w-95 rounded placeholder:text-zinc-500"
             type="password"
             name="password"
             id="password"
             placeholder="Enter password"
           />
-          <button className="bg-zinc-900 text-white font-medium p-3 rounded-full active:scale-95 cursor-pointer">
+          <button className="bg-zinc-900 text-white font-medium p-3 rounded-md active:scale-95 cursor-pointer">
             Login
           </button>
         </form>
         <p>
           Don't have an account ?{" "}
-          <Link to="/login" className="text-blue-700">
+          <Link to="/register" className="text-blue-800">
             Register
-          </Link>{" "}
+          </Link>
         </p>
       </div>
     </div>

@@ -31,7 +31,7 @@ const Register = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <input
           onInput={(e)=> setUsername(e.target.value)}
-            className="bg-zinc-300 p-3 w-95 rounded"
+            className="bg-zinc-300 p-3 w-95 rounded outline-none placeholder:text-zinc-500"
             type="text"
             name="usename"
             id="username"
@@ -39,7 +39,7 @@ const Register = () => {
           />
           <input
           onInput={(e)=> setEmail(e.target.value)}
-            className="bg-zinc-300 p-3 w-95 rounded"
+            className="bg-zinc-300 p-3 w-95 rounded outline-none placeholder:text-zinc-500"
             type="email"
             name="email"
             id="email"
@@ -47,13 +47,13 @@ const Register = () => {
           />
           <input
           onInput={(e)=> setPassword(e.target.value)}
-            className="bg-zinc-300 p-3 w-95 rounded"
+            className="bg-zinc-300 p-3 w-95 rounded outline-none placeholder:text-zinc-500"
             type="password"
             name="password"
             id="password"
             placeholder="Enter password"
           />
-          <button className="bg-zinc-900 text-white font-medium p-3 rounded-full active:scale-95 cursor-pointer">
+          <button className="bg-zinc-900 text-white font-medium p-3 rounded-md active:scale-95 cursor-pointer">
             Register
           </button>
         </form>
