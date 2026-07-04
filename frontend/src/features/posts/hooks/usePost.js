@@ -1,11 +1,11 @@
 import { useContext } from "react"
 import { PostContext } from "../post.context"
-import { getFeed, getLikePost, getPost, getSavePost} from "../services/post.api"
+import { getFeed, getLikePost, getPost, getSavePost } from "../services/post.api"
 
 
-export const usePost = ()=> {
+export const usePost = () => {
     const context = useContext(PostContext)
-    const {post, setPost, feed, setFeed, loading, setLoading, saved, setSaved, liked, setLiked} = context
+    const { post, setPost, feed, setFeed, loading, setLoading, saved, setSaved, liked, setLiked } = context
 
 
     async function handleGetPost() {
@@ -44,7 +44,7 @@ export const usePost = ()=> {
         }
     }
 
-    async function handleGetLikePosts(){
+    async function handleGetLikePosts() {
         setLoading(true)
         try {
             const data = await getLikePost()
