@@ -1,41 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 import FormInput from "../components/FormInput";
 
-// Replace with your real API call
-async function register({ username, email, password }) {
-  await new Promise((r) => setTimeout(r, 1000));
-  if (username.length < 2) throw new Error("Username must be at least 2 characters.");
-  if (password.length < 6) throw new Error("Password must be at least 6 characters.");
-  return { user: { name: username, email } };
-}
-
-function getErrorMessage(error, fallback) {
-  return (error && error.message) || fallback;
-}
-
-export default function Register({ onSuccess, onSwitchToLogin }) {
+export default function Register() {
+  const navigate = useNavigate()
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
-
-  async function handleRegister({ username, email, password }) {
-    setLoading(true);
-    try {
-      const data = await register({ username, email, password });
-      onSuccess?.(data.user);
-      return data;
-    } catch (error) {
-      throw new Error(
-        getErrorMessage(error, "We couldn't create your account. Please try again.")
-      );
-    } finally {
-      setLoading(false);
-    }
-  }
+  const {handleRegister, loading} = useAuth()
 
   function validate() {
     const errs = {};
@@ -52,6 +28,7 @@ export default function Register({ onSuccess, onSwitchToLogin }) {
     if (!validate()) return;
     try {
       await handleRegister({ username, email, password });
+      navigate("/")
     } catch (err) {
       setFormError(err.message);
     }
@@ -133,7 +110,7 @@ export default function Register({ onSuccess, onSwitchToLogin }) {
         <p className="mt-6 text-center text-sm text-gray-500">
           Already have an account?{" "}
           <button
-            onClick={onSwitchToLogin}
+            onClick={()=> navigate("/login")}
             className="font-semibold text-gray-900 underline underline-offset-2 hover:text-gray-700"
           >
             Sign in

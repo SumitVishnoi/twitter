@@ -1,37 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 import FormInput from "../components/FormInput";
 
-// Replace with your real API call
-async function login({ email, password }) {
-  await new Promise((r) => setTimeout(r, 1000));
-  if (password.length < 6) throw new Error("Incorrect email or password.");
-  return { user: { name: email.split("@")[0], email } };
-}
-
-function getErrorMessage(error, fallback) {
-  return (error && error.message) || fallback;
-}
-
-export default function Login({ onSuccess, onSwitchToRegister }) {
+export default function Login() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
+  const {handleLogin, loading} = useAuth()
 
-  async function handleLogin({ email, password }) {
-    setLoading(true);
-    try {
-      const data = await login({ email, password });
-      onSuccess?.(data.user);
-      return data;
-    } catch (error) {
-      throw new Error(getErrorMessage(error, "We couldn't sign you in. Please try again."));
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function validate() {
     const errs = {};
@@ -47,8 +27,9 @@ export default function Login({ onSuccess, onSwitchToRegister }) {
     if (!validate()) return;
     try {
       await handleLogin({ email, password });
+      navigate("/")
     } catch (err) {
-      setFormError(err.message);
+      setFormError("All fields are required", err);
     }
   }
 
@@ -127,7 +108,7 @@ export default function Login({ onSuccess, onSwitchToRegister }) {
         <p className="mt-6 text-center text-sm text-gray-500">
           Don't have an account?{" "}
           <button
-            onClick={onSwitchToRegister}
+            onClick={()=> navigate("/register")}
             className="font-semibold text-gray-900 underline underline-offset-2 hover:text-gray-700"
           >
             Create one

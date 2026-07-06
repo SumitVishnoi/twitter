@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth.context";
-import { getMe, login, register } from "../services/atuh.api";
-import { getErrorMessage } from "../../../utils/errorHandler";
+import { getMe, login, register, logout } from "../services/atuh.api";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -16,10 +15,8 @@ export const useAuth = () => {
       return data;
     } catch (error) {
       throw new Error(
-        getErrorMessage(
-          error,
-          "We couldn't create your account. Please try again.",
-        ),
+        "We couldn't create your account. Please try again.",
+        error,
       );
     } finally {
       setLoading(false);
@@ -33,9 +30,7 @@ export const useAuth = () => {
       setUser(data.user);
       return data;
     } catch (error) {
-      throw new Error(
-        getErrorMessage(error, "We couldn't sign you in. Please try again."),
-      );
+      throw new Error(error, "We couldn't sign you in. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -53,17 +48,17 @@ export const useAuth = () => {
     }
   }
 
-//   async function handleLogout() {
-//     setLoading(true);
-//     try {
-//       const data = await logout();
-//       setUser(null);
-//     } catch (error) {
-//       throw new Error("Error logging out user", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }
+    async function handleLogout() {
+      setLoading(true);
+      try {
+        const data = await logout();
+        setUser(null);
+      } catch (error) {
+        throw new Error("Error logging out user", error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
   useEffect(() => {
     handleGetMe();
@@ -75,5 +70,6 @@ export const useAuth = () => {
     handleRegister,
     handleLogin,
     handleGetMe,
+    handleLogout
   };
 };
