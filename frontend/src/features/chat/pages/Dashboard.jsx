@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react'
-import Sidebar from '../components/Sidebar'
-import MessagePanel from '../components/MessagePanel'
-import { useUser } from '../../user/hooks/useUser'
+import React, { useEffect } from "react";
+import Sidebar from "../components/Sidebar";
+import MessagePanel from "../components/MessagePanel";
+import { useUser } from "../../user/hooks/useUser";
 
 const Dashboard = () => {
-    const {handleGetAllUsers, allUser} = useUser()
+  const { handleGetAllUsers, allUser } = useUser();
 
-  useEffect(()=> {
-    handleGetAllUsers()
-  }, [])
+  useEffect(() => {
+    handleGetAllUsers();
+  }, []);
 
-console.log(allUser)
+  console.log(allUser);
   return (
-    <div className='w-full h-screen lg:flex-row flex flex-col gap-4 p-3'>
-      <Sidebar users={allUser}/>
-      <MessagePanel />
-    </div>
-  )
-}
+    <div className="flex h-screen overflow-hidden gap-4 p-2">
+      <div className="hidden md:block w-1/4">
+        <Sidebar />
+      </div>
 
-export default Dashboard
+      <div className="flex-1 min-w-0">
+        <MessagePanel />
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
